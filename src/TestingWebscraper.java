@@ -15,5 +15,6 @@ public class TestingWebscraper {
         String second = "</a></td>";
         WebScraper ws = new WebScraper(website,first,second);
         System.out.println(ws.retrieve());
+        System.out.println(ws.getData());
     }
 }

@@ -25,6 +25,8 @@ public class CurrencyApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        leftGroup = new javax.swing.ButtonGroup();
+        rightGroup = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         firstCurrencyField = new javax.swing.JTextField();
         secondCurrencyField = new javax.swing.JTextField();
@@ -67,6 +69,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        leftGroup.add(usdFirstButton);
         usdFirstButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         usdFirstButton.setText("American USD");
         usdFirstButton.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +78,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        leftGroup.add(euroFirstButton);
         euroFirstButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         euroFirstButton.setText("Euro");
         euroFirstButton.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +87,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        leftGroup.add(yenFirstButton);
         yenFirstButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         yenFirstButton.setText("Japanese Yen");
         yenFirstButton.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +96,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        leftGroup.add(poundFirstButton);
         poundFirstButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         poundFirstButton.setText("British Pound");
         poundFirstButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +105,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        leftGroup.add(cadFirstButton);
         cadFirstButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         cadFirstButton.setText("Canadian CAD");
         cadFirstButton.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +114,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        rightGroup.add(usdSecondButton);
         usdSecondButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         usdSecondButton.setText("American USD");
         usdSecondButton.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +123,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        rightGroup.add(euroSecondButton);
         euroSecondButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         euroSecondButton.setText("Euro");
         euroSecondButton.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +132,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        rightGroup.add(yenSecondButton);
         yenSecondButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         yenSecondButton.setText("Japanese Yen");
         yenSecondButton.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +141,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        rightGroup.add(poundSecondButton);
         poundSecondButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         poundSecondButton.setText("British Pound");
         poundSecondButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +150,7 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
 
+        rightGroup.add(cadSecondButton);
         cadSecondButton.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         cadSecondButton.setText("Canadian CAD");
         cadSecondButton.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +244,7 @@ public class CurrencyApp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void firstCurrencyFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstCurrencyFieldActionPerformed
-        // TODO add your handling code here:
+        refresh();
     }//GEN-LAST:event_firstCurrencyFieldActionPerformed
 
     private void secondCurrencyFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondCurrencyFieldActionPerformed
@@ -280,15 +292,71 @@ public class CurrencyApp extends javax.swing.JFrame {
     }//GEN-LAST:event_cadSecondButtonActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // TODO add your handling code here:
+        firstCurrency = Double.valueOf(firstCurrencyField.getText());
+        if (firstSignifier == 0) {
+            middleValue = firstCurrency / usdRate;
+            System.out.println("turned to dollars");
+        } else if (firstSignifier == 1) {
+            middleValue = firstCurrency / euroRate;
+            System.out.println("turned to dollars");
+        } else if (firstSignifier == 2) {
+            middleValue = firstCurrency / yenRate;
+            System.out.println("turned to dollars");
+        } else if (firstSignifier == 3) {
+            middleValue = firstCurrency / poundRate;
+            System.out.println("turned to dollars");
+        } else if (firstSignifier == 4) {
+            middleValue = firstCurrency / cadRate;
+            System.out.println("turned to dollars");
+        } else {
+            middleValue = firstCurrency / usdRate;
+            System.out.println("turned to dollars");
+        }
+        System.out.println(middleValue);
+        if (secondSignifier == 0) {
+            secondCurrency = middleValue * usdRate;
+        } else if (secondSignifier == 1) {
+            secondCurrency = middleValue * euroRate;
+        } else if (secondSignifier == 2) {
+            secondCurrency = middleValue * yenRate;
+        } else if (secondSignifier == 3) {
+            secondCurrency = middleValue * poundRate;
+        } else if (secondSignifier == 4) {
+            secondCurrency = middleValue * cadRate;
+        } else {
+            secondCurrency = middleValue * usdRate;
+        }
+        System.out.println(secondCurrency);
+        double roundedNum = Math.round(secondCurrency*100.0) / 100.0;
+        System.out.println(roundedNum);
+        secondCurrencyField.setText(Double.toString(roundedNum));
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        
+        refresh();
     }//GEN-LAST:event_refreshButtonActionPerformed
     private void refresh() {
-        WebScraper ws = new WebScraper();
+        String website = "https://www.x-rates.com/table/?from=USD&amount=1"; //website, remains constant
+        String start = "<td class='rtRates'><a href='https://www.x-rates.com/graph/?from=USD&amp;to=GBP'>"; //assigns start to pound
+        String end = "</a></td>"; //assigns end, remains constant
+        WebScraper ws = new WebScraper(website, start, end); //gets value for pound
+        poundRate = Double.valueOf(ws.retrieve()); //assigns value to global variable
+        start = "<td class='rtRates'><a href='https://www.x-rates.com/graph/?from=USD&amp;to=EUR'>"; //changes start to euro
+        ws = new WebScraper(website, start, end);
+        euroRate = Double.valueOf(ws.retrieve());
+        start = "<td class='rtRates'><a href='https://www.x-rates.com/graph/?from=USD&amp;to=CAD'>"; //changes start to CAD
+        ws = new WebScraper(website, start, end);
+        cadRate = Double.valueOf(ws.retrieve());
+        start = "<td class='rtRates'><a href='https://www.x-rates.com/graph/?from=USD&amp;to=JPY'>";
+        ws = new WebScraper(website, start, end);
+        yenRate = Double.valueOf(ws.retrieve());
+        System.out.println(usdRate);
+        System.out.println(euroRate);
+        System.out.println(yenRate);
+        System.out.println(poundRate);
+        System.out.println(cadRate);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -323,13 +391,16 @@ public class CurrencyApp extends javax.swing.JFrame {
             }
         });
     }
-    public final int usdRate = 1; //its signifier is 0
-    public int euroRate = 0;  //its signifier is 1
-    public int yenRate = 0; //its signifier is 2
-    public int poundRate = 0; //its signifier is 3
-    public int cadRate = 0; //its signifier is 4
+    public final double usdRate = 1; //its signifier is 0
+    public double euroRate = 0;  //its signifier is 1
+    public double yenRate = 0; //its signifier is 2
+    public double poundRate = 0; //its signifier is 3
+    public double cadRate = 0; //its signifier is 4
     public int firstSignifier = 0;
     public int secondSignifier = 0;
+    public double firstCurrency = 0;
+    public double secondCurrency = 0;
+    public double middleValue = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton cadFirstButton;
     private javax.swing.JRadioButton cadSecondButton;
@@ -337,9 +408,11 @@ public class CurrencyApp extends javax.swing.JFrame {
     private javax.swing.JRadioButton euroSecondButton;
     private javax.swing.JTextField firstCurrencyField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.ButtonGroup leftGroup;
     private javax.swing.JRadioButton poundFirstButton;
     private javax.swing.JRadioButton poundSecondButton;
     private javax.swing.JButton refreshButton;
+    private javax.swing.ButtonGroup rightGroup;
     private javax.swing.JTextField secondCurrencyField;
     private javax.swing.JButton submitButton;
     private javax.swing.JRadioButton usdFirstButton;

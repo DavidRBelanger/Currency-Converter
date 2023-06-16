@@ -54,10 +54,8 @@ public class WebScraper {
 
     public String retrieve() {
         data = this.getData();
-        int firstIndex = data.indexOf(startingKey) + startingKey.length() + 1;
-        System.out.println(firstIndex);
+        int firstIndex = data.indexOf(startingKey) + startingKey.length();
         int secondIndex = data.indexOf(endKey, firstIndex);
-        System.out.println(secondIndex);
         return data.substring(firstIndex, secondIndex);
     }
 }
